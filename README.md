@@ -46,13 +46,21 @@ Intercept request, and modify "Content-Length" Header from 21 to 0, then forward
 **Resolution:**
 
 1 - Use Chrome devtools to pull request headers initially to see how the web app responds to POST requests on the security questions page
+
 2 - Once we have what *should* be in the request headers, run the same request in burpsuite (this can be done with curl as well from a shell, but it was faster to use burpsuite. Don't judge me)
+
 3 - Intercept the POST for /login/donutsAreGr8/butChocolateIsBetter
+
 4 - Modify the "Content-Length" header from "21" to "0"
+
 5 - Modify the "Upgrade-Insecure-Requests" header from "1" to "0"
+
 5 - Make sure to remove "secQ1=&secQ2=" from the payload (since the Content-Length 0 is now telling the web app to expect a 0 length payload)
+
 6 - Forward request with modified header and payload to app. 
+
 7 - App responds to request by letting us through past the security questions, and to waiting flag
+
 8 - Profit :)
 
 Request and response headers:
